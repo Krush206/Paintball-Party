@@ -1,0 +1,140 @@
+Paintball Party Character Designer (c) 2005 NewCreature Design
+--------------------------------------------------------------
+
+This program is freeware. Enjoy.
+
+
+Disclaimer
+----------
+
+NewCreature Design makes no gaurantees regarding the Paintball Party Character
+Designer software. We take no responsibility for any damages the software may
+cause to you or your equipment, though it has not been known to cause any
+problems. Please contact us if you have any trouble with the software and we'll
+see if we can resolve the problem.
+
+
+===============================================================================
+
+
+Getting Started
+---------------
+
+When Character Designer is started, you can either load an existing character
+or create a new one from scratch. For your first time, we recommend loading the
+included template character "template.ppc" and fiddle a little to get to know
+the program.
+
+
+Things You Might Want to Know
+-----------------------------
+
+Characters are made up of a collection of animations attached to player states.
+A player state is a way the player can act (like jumping). In order to make a
+character, you must fill all the possible player states with animations.
+
+Each state also has a CMAP (collision map) which tells the game what part of
+the character is solid.
+
+For firing states you also need to specify where the paintball is generated and
+where the "gun flash" appears in relation to the character.
+
+In addition, you need to specify where the "it" arrow and the "pointer" arrow
+draw in relation to the character.
+
+You should make all the player animations the same size. The other animations
+don't need to be the same size (paintball, etc.).
+
+
+Global Controls
+---------------
+
+Here are the shortcut keys to do some of the common tasks:
+
+F2         - Save current character
+F3         - Load a character
+F4         - Create a new character
+Tab        - Change editor mode
+Left/Right - Select the state to edit
+
+To bring up the menu, move the mouse to the upper left corner of the screen.
+
+
+Animation Controls
+------------------
+
+These are the extra controls available in Animation editor mode:
+
++/- (Numpad) - Zoom in/out
+Up/Down      - Select previous/next animation frame
+A            - Shift current image left
+D            - Shift current image right
+W            - Shift current image up
+S            - Shift current image down
+Shift+A      - Shift current animation left
+Shift+D      - Shift current animation right
+Shift+W      - Shift current animation up
+Shift+S      - Shift current animation down
+Shift+Del    - Cut currently selected area from image
+Ctrl+C       - Copy currently selected area to clipboard
+Ctrl+V       - Paste clipboard into image
+H            - Flip selected area horizontally
+V            - Flip selected area vertically
+R            - Turn selected area counter-clockwise
+<            - Decrease animation speed
+>            - Increase animation speed
+
+Use the left mouse button to draw in the image box using the selected tool or
+select a color from the palette. The right mouse button will select the color
+you are pointing to in the image box.
+
+To help in the creation of characters, you can use the "Create Flipped" and
+"Create Fire" options in the ANI menu. "Create Flipped" creates the flipped
+version of the current animation and places it in the appropriate state. The
+"Create Fire" option copies the current animation into the firing state, useful
+if the firing state and regular state will look the same. If all the firing
+states are going to be identical to the regular states, you can used the
+"Create All Fire" option to copy them all over.
+
+
+Layout Controls
+---------------
+
+Finally, the layout controls:
+
+Enter - Select next item
+
+Use the mouse to drag the pegs (white squares) and move the items around as you
+please.
+
+If the option "CMAP Locked" is selected, all the ducking states will share one
+CMAP and all the standing states will share another CMAP. All the CMAPs should
+have the same left, right, and bottom edge to prevent movement problems in the
+game. You can do otherwise, but your character might pass through walls and
+such.
+
+
+===============================================================================
+
+
+Contacting Us
+-------------
+
+If you have general questions about our programs or anything else you can
+contact us via e-mail. Please report any bugs you find in our software as well.
+Comments are also appreciated. Visit our web site for the latest updates and
+releases.
+
+You may submit new characters to us by e-mail or upload it to our anonymous FTP
+server. We will review any submitted characters for addition to the Paintball
+Party characters repository on our web site. Please submit files in ZIP format.
+The ZIP file should have the character file (".ppc") and an optional text file
+containing information about your character (author credits, etc.).
+
+E-mail     - todd@ncdgames.com
+
+Snail Mail - 1409 Diuguid Drive
+             Murray, KY 42071
+             Apt. A5
+
+Web Site   - http://www.ncdgames.com

@@ -1,0 +1,163 @@
+Paintball Party Level Builder (c) 2005 NewCreature Design
+---------------------------------------------------------
+
+This program is freeware. Enjoy.
+
+
+Disclaimer
+----------
+
+NewCreature Design makes no gaurantees regarding the Paintball Party Level
+Builder software. We take no responsibility for any damages the software may
+cause to you or your equipment, though it has not been known to cause any
+problems. Please contact us if you have any trouble with the software and we'll
+see if we can resolve the problem.
+
+
+Getting Started
+---------------
+
+When Level Builder is started, you can either load an existing level or create
+a new one from scratch. For your first time, we recommend loading the included
+template level "template.ppl" and fiddle a little to get to know the program.
+
+
+Things You Might Want to Know
+-----------------------------
+
+Levels are made up of a tileset, tilemap, and object map. All of these parts
+are combined into one file format ("*.ppl"). You can also save the individual
+parts using the export commands on the "File" menu.
+
+The tileset contains 256 tiles, each of which is an animation. You can also do
+tile animations that change one tile to another after a certain amount of time.
+The tile properties dialog allows you to specify which side of each tile is
+solid. You can also make a tile translucent. If you'd like to draw tiles in a
+separate program, remember that all tiles are 16x16 and they must adhere to the
+Paintball Party palette (they will automatically be converted if they don't).
+
+The tilemap contains 5 layers, each with it's own scrolling speed. One layer,
+which you specify from map properties, is the ILayer with which all the game
+objects interact. You can also set the viewable map area using the XMin, XMax,
+YMin, and YMax settings.
+
+The object map is where you place all the player starting points, ammo, etc. Be
+aware the a level needs, at the very least, starting points for the number of
+players you want your level to support. If you try to play a level and you get
+the message "Mode not supported!" your map lacks some object(s).
+
+
+Global Controls
+---------------
+
+Here are the shortcut keys to do some of the common tasks:
+
+F2         - Save current level
+F3         - Load a level
+F4         - Create a new level
+Tab        - Change editor mode
+
+To bring up the menu, move the mouse to the upper left corner of the screen.
+
+
+Object Map Controls
+-------------------
+
+These are the extra controls available in Object Map editor mode:
+
+Cursor keys  - Scroll the map (hold Left Shift to scroll faster)
+Delete       - Delete currently selected object
+>            - Select the next object
+<            - Select the previous object
+Left Control - Hold to snap object to grid when dragging (8x8)
+T            - Change the type of the currently selected object
+Delete       - Delete the currently selected object
+
+You can select objects already on the map and drag them using the left mouse
+button. Click the right mouse button to create a new object of the selected
+type. The object type is selected using the Object Palette at the right side of
+the screen.
+
+
+Tilemap Controls
+----------------
+
+These are the extra controls available in Tilemap editor mode:
+
+Cursor keys  - Scroll the map (hold Left Shift to scroll faster)
+A            - Shift current layer left one tile
+D            - Shift current layer right one tile
+W            - Shift current layer up one tile
+S            - Shift current layer down one tile
+F9           - Access the tilemap properties dialog
+
+Click the left mouse button over the layer or map view to draw the current tile
+onto the map (hold shift to floodfill). Use the right mouse button to select a
+tile from the map. Select a tile from the tile palette at the right side of the
+screen using the left mouse button.
+
+
+Tileset Controls
+----------------
+
+These are the extra controls available in Tileset editor mode:
+
+Up/Down      - Previous/Next frame of the tile animation
+A            - Shift tile frame left
+D            - Shift tile frame right
+W            - Shift tile frame up
+S            - Shift tile frame down
+Shift+A      - Shift tile animation left
+Shift+D      - Shift tile animation right
+Shift+W      - Shift tile animation up
+Shift+S      - Shift tile animation down
+Shift+Del    - Cut currently selected area from frame to clipboard
+Ctrl+C       - Copy currently selected area from frame to clipboard
+Ctrl+V       - Paste clipboard to current frame
+R            - Rotate currently selected area
+H            - Flip currently selected area horizontally
+V            - Flip currently selected area vertically
+F9           - Access the tile properties
+
+Click the left mouse button over the enlarged tile image to draw the current
+color onto the image (hold shift to floodfill). Use the right mouse button to
+grab a color from the tile.
+
+
+Adding Custom Music
+-------------------
+
+Paintball Party supports the following music formats:
+
+IT, XM, S3M, MOD, MP3, OGG
+
+The music file should have the same name as the level except with the proper
+file extension for the format of the music. If the game doesn't find custom
+music (or if the player has the Random Music option enabled), Paintball Party
+will select a random song from within the game directory.
+
+
+===============================================================================
+
+
+Contacting Us
+-------------
+
+If you have general questions about our programs or anything else you can
+contact us via e-mail. Please report any bugs you find in our software as well.
+Comments are also appreciated. Visit our web site for the latest updates and
+releases.
+
+We will review any submitted levels for addition to the Paintball Party levels
+repository on our web site.  Please submit files in ZIP format. The ZIP file
+should have the level file (".ppl"), music file if your level has custom music,
+and an optional text file containing information about your level (author
+credits, etc.).
+
+E-mail     - todd@ncdgames.com
+
+Snail Mail - 1409 Diuguid Drive
+             Murray, KY 42071
+             Apt. A5
+
+Web Site   - http://www.ncdgames.com

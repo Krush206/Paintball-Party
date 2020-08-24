@@ -1,0 +1,153 @@
+
+ALLEGTTF FAQ for version 1.9                                  16:36 29-05-2000 
+
+Questions or comments to:
+Doug Eleveld <deleveld@dds.nl> <delev@anest.azg.nl>
+
+
+--- FAQ Contents ---
+
+Section 1: Installing
+Section 2: Rebuilding
+Section 3: Bugs
+Section 4: Using Allegttf
+Section 5: Resources
+
+
+--- Section 1: Installing ---
+
+Q: How do I install Allegttf?
+
+A: That depends on your platform.
+
+   --DJGPP--
+
+   Just run fixdjgpp.bat and then the other batches in the library root
+   directory. Of course, you can go to the source and examples directories
+   and run make by hand.  Then copy the lib/libalttf.a to your DJGPP lib
+   directory and include/allegttf.h to your DJGPP include directory.
+
+   --Linux--
+
+   Run ./fixlinux and then you can use the sh-versions of the scripts
+   (possibly useable with any platform that can run bash or any sh). You must
+   have the Allegro library and the 'allegro-config' script available for the
+   examples to compile. 
+
+   --MinGW32 static version--
+
+   Run fixmings.bat and then go to the source directory and run make with the
+   location of your MinGW installation. An example command line looks like
+
+   make MINGDIR=c:/mingw32
+
+   To make the examples, go to the examples directory and run make with the
+   option -k ( make -k ). This will keep going, no matter what errors are
+   experienced during linking. ex0 and ex1, for example, can't be linked
+   because of some variables found only inside the Allegro DLL and there are
+   no functions to get their values. The current troublemaker is _color_conv,
+   if there was an get_color_conversion() function in Allegro we would be
+   problem free.
+
+   <Dan Bogdanov>
+   WARNING! MinGW profile.exe runs some of the tests and then hangs (at least
+   on my system) - reason unknown... The only idea I have is that it's got
+   something to do with video hardware/drivers. I have a 1MB S3 on the box
+   that I did the testing on and it hanged after testing 640x480x16.
+   Maybe there's a problem with 24 bit graphics? 1 MB should be able to draw
+   640x480x24 to my knowledge...
+
+
+--- Section 2: Rebuilding ---
+
+Q: After I installed the latest version of Allegro, Allegttf doesn't work 
+   anymore..
+
+A: Allegttf depends on the Allegro header files.  If Allegro gets a new
+   version you have to rebuild Allegttf.  
+
+
+Q: I installed a new version of Allegro and now I want to rebuild Allegttf.
+   How do I do this?
+
+A: Go to the Allegttf directory, run CLEANUP.BAT and then MAKEALL.BAT.  Then
+   go to the examples directory and make sure the examples work correctly.
+   If the examples work like they should, then copy the ALLEGTTF.H to your 
+   djgpp/include directory and LIBALTTF.A to your djgpp/lib directory.
+
+
+Q: When building Allegttf I get the following:
+   f:/djgpp/bin/ld.exe: cannot open -lstdcx: No such file or directory
+
+   If you have C++ properly installed, this is probably a long filename (LFN)
+   problem.  Read the DJGPP FAQ it should tell you everything you need to know.
+   Basiclly the linker can't find the libstdcx.a file.  What is it called on 
+   your system?  It might me libstdcxx.a or maybe libstd~1.a, so just change 
+   the makefile to link to the right library, or make a copy of the file and 
+   name it libstdcx.a.
+
+   I have recently removed any linking to libstdcx.a, so this should not 
+   happen with Allegttf version 1.7 or later.
+
+
+--- Section 3: Bugs ---
+
+Q: I think I found a bug.  How do I get you to fix it?
+
+A: Well, you have to tell me as much as possible about where the bug occurs
+   and under what conditions it shows up.  There are three approaches:
+
+   1: Rebuild the library with debugging info and then send me the symify'd 
+      stack trace.
+
+   2: Run and build the Rhide project in the examples directory (debugging is
+      by default on) and make it crash.  Then send me the text in crash 
+      window so I can see where it it crashing.
+
+   3: Send me the smallest amount of code that procuces the bug.
+
+   4: Fix it yourself and send me the fixed source code.
+
+   Of course I'd prefer that you did all of these things, especially number 4.
+   You can send the bug to my email address, which is mentioned elsewhere in 
+   the docs.
+
+
+Q: The linker complains that it cannot find some Allegro variables while I 
+   really did link with Allegttf library and the Allegro library.
+
+A: Did you make sure that you linked to libalttf.a before liballeg.a?  Just 
+   remember that the low-level libraries get linked last.  Since libalttf.a
+   relies on stuff from liballeg.a and therefore must be linked first.  If
+   in doubt, look at the order of the libraries in the examples.
+
+Q: I downloaded a font from the web and Allegttf doesn't print it out 
+   correctly.
+
+A: I really don't know.  Some fonts are pretty poor quality and probably 
+   use some weird unicode stuff that I don't understand. sorry.
+
+
+--- Section 4: Using Allegttf ---
+
+Q: How to I print a font in bold or italics.
+
+A: You can't yet.  You go find a font that looks like the font, but is bolder
+   and use that.  I don't know of any algorithm that bolds/italicices fonts and 
+   still lets the font look good.  Of course if you know how to do this you can
+   send me some info on the algorithm (or send me some code) and I'll include 
+   it in the next version along with a great big thanks to you.
+
+
+--- Section 4: Resources ---
+
+Q: Where can I find freeware and shareware truetype fonts to use with Allegttf?
+
+A: Oh man, there are thousands of them.  Do a web search (I use
+   www.altavista.com) with the words "free font ttf resource developer"
+   (without the quotes, of course) and you should find enough links to make
+   you sick.
+
+
+End of ALLEGTTF FAQ...
+

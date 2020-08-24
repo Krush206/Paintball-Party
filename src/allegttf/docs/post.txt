@@ -1,0 +1,18 @@
+Announce: AllegTTF version 1.9 available
+
+What is ALLEGTTF
+
+ALLEGTTF is a collection of functions to produce anti-aliased text 
+output and TTF (True Type Font) loader, a GRX font loader and a bitmap 
+font loader for use with Allegro and DJGPP.   Antialiased text means 
+that fonts have 'soft' edges and blend into their backgrounds smoothly.  
+Antialiased fonts are useful because the look a lot better than 
+non-antialiased fonts, expecially at low resolutions/point sizes.
+
+Version 2.0 is an Allegro 3.9.36 WIP compatibility update over 1.9.
+
+You can find a link to it and some other stuff at:
+
+http://huizen.dds.nl/~deleveld/index.htm
+
+Doug Eleveld

@@ -1,0 +1,41 @@
+Paintball Party Source Code (c) 2005 NewCreature Design
+-------------------------------------------------------
+
+This package contains all the source code from Paintball Party. Be aware that
+you will need to have some additional libraries installed in order to compile
+the sources.
+
+
+Disclaimer
+----------
+
+NewCreature Design makes no gaurantees regarding the Paintball Party source
+code. You may do whatever you wish with the code, however you are required to
+notify us (e-mail todd@ncdgames.com) if you release a modified version of the
+game. If you create a port of Paintball Party for another platform, please
+include all the original documentation in the distribution.
+
+
+Requirements
+------------
+
+GCC compiler (http://www.mingw.org)
+Allegro 4.2 (http://alleg.sourceforge.net)
+DUMB (https://sourceforge.net/projects/dumb)
+
+
+Compiling
+---------
+
+Run "make" from the "src" subdirectory to build all the executables. These will
+be placed in the "bin" subdirectory. You will (most likely) need to modify the
+makefile if you are compiling on another platform.
+
+
+Conclusion
+-----------
+
+It has been a great pleasure working on the Paintball Party project. We see no
+benefit in keeping our source codes under wraps. If you have comments feel free
+to contact us (e-mail todd@ncdgames.com) we'd be happy to hear from you. Happy
+coding :)
