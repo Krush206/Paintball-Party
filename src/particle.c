@@ -1,3 +1,4 @@
+#include <math.h>
 #include "includes.h"
 
 void particle_logic(PARTICLE * pp)
@@ -6,9 +7,9 @@ void particle_logic(PARTICLE * pp)
 
     if(pp->active)
     {
-        pp->fx = fadd(pp->fx, pp->vx);
-        pp->fy = fadd(pp->fy, pp->vy);
-        pp->vy = fadd(pp->vy, ftofix(0.5));
+        pp->fx = fixadd(pp->fx, pp->vx);
+        pp->fy = fixadd(pp->fy, pp->vy);
+        pp->vy = fixadd(pp->vy, ftofix(0.5));
         if(pp->vy > itofix(7))
         {
             pp->vy = itofix(7);
@@ -56,7 +57,7 @@ void generate_paintball_splat_particles(PAINTBALL * pp)
 	{
 		angle = rand() % 256;
 		length = rand() % (pp_game_data.player[pp->who].character.pap->w / 2);
-		generate_particle(pp->x + pp_game_data.player[pp->who].character.pap->w / 2, pp->y + pp_game_data.player[pp->who].character.pap->h / 2, fixtof(fmul(ftofix(length), fcos(itofix(angle)))), fixtof(fmul(ftofix(length), fsin(itofix(angle))) - itofix(1)), pp->who);
+		generate_particle(pp->x + pp_game_data.player[pp->who].character.pap->w / 2, pp->y + pp_game_data.player[pp->who].character.pap->h / 2, fixtof(fixmul(ftofix(length), cos(itofix(angle)))), fixtof(fixmul(ftofix(length), sin(itofix(angle))) - itofix(1)), pp->who);
 	}
 }
 

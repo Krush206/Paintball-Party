@@ -72,7 +72,7 @@
 	
 	int gametime_init(unsigned int freq)
 	{
-		install_int_ex(gametime_ticker, BPS_TO_TIMER(freq))
+		install_int_ex(gametime_ticker, BPS_TO_TIMER(freq));
 		gametime_tick = 0;
 		gametime_installed = 1;
 		return 1;

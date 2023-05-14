@@ -34,8 +34,8 @@ int object_drop(OBJECT * op, int type, fixed ox, fixed oy)
 				{
 					pp_game_data.object[i].type = type;
 					pp_game_data.object[i].ap = NULL;
-					pp_game_data.object[i].x = fadd(op->x, ox);
-					pp_game_data.object[i].y = fadd(op->y, oy);
+					pp_game_data.object[i].x = fixadd(op->x, ox);
+					pp_game_data.object[i].y = fixadd(op->y, oy);
 					pp_game_data.object[i].active = 1;
 					pp_game_data.object[i].flag[PP_GENERATOR_FLAG_OBJECT] = op->type;
 					switch(op->type)
@@ -79,8 +79,8 @@ int object_drop(OBJECT * op, int type, fixed ox, fixed oy)
 				{
 					pp_game_data.object[i].type = type;
 					pp_game_data.object[i].ap = pp_object_ani[pp_game_data.object[i].type];
-					pp_game_data.object[i].x = fadd(op->x, ox);
-					pp_game_data.object[i].y = fadd(op->y, oy);
+					pp_game_data.object[i].x = fixadd(op->x, ox);
+					pp_game_data.object[i].y = fixadd(op->y, oy);
 					pp_game_data.object[i].active = 1;
 					object_initialize(&pp_game_data.object[i]);
 					return i;

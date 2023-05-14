@@ -616,9 +616,9 @@ void lighting_blender(PALETTE pal, int x, int y, RGB *rgb)
 	}
 	else if(light < 32)
 	{
-		rgb->r = fixtoi(fmul(itofix(pal[y].r), fdiv(itofix(light * 2 + 1), itofix(63))));
-		rgb->g = fixtoi(fmul(itofix(pal[y].g), fdiv(itofix(light * 2 + 1), itofix(63))));
-		rgb->b = fixtoi(fmul(itofix(pal[y].b), fdiv(itofix(light * 2 + 1), itofix(63))));
+		rgb->r = fixtoi(fixmul(itofix(pal[y].r), fixdiv(itofix(light * 2 + 1), itofix(63))));
+		rgb->g = fixtoi(fixmul(itofix(pal[y].g), fixdiv(itofix(light * 2 + 1), itofix(63))));
+		rgb->b = fixtoi(fixmul(itofix(pal[y].b), fixdiv(itofix(light * 2 + 1), itofix(63))));
 	}
 	
 	/* do light blend */
@@ -630,15 +630,15 @@ void lighting_blender(PALETTE pal, int x, int y, RGB *rgb)
 	}
 	else
 	{
-		light_level = fdiv(itofix((light - 32) * 2 + 1), itofix(63));
+		light_level = fixdiv(itofix((light - 32) * 2 + 1), itofix(63));
 		left = itofix(63 - pal[y].r);
-		final = pal[y].r + fixtoi(fmul(left, light_level));
+		final = pal[y].r + fixtoi(fixmul(left, light_level));
 		rgb->r = final;
 		left = itofix(63 - pal[y].g);
-		final = pal[y].g + fixtoi(fmul(left, light_level));
+		final = pal[y].g + fixtoi(fixmul(left, light_level));
 		rgb->g = final;
 		left = itofix(63 - pal[y].b);
-		final = pal[y].b + fixtoi(fmul(left, light_level));
+		final = pal[y].b + fixtoi(fixmul(left, light_level));
 		rgb->b = final;
 	}
 }

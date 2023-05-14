@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "includes.h"
 
 #define PP_NEXT_FRAMES 2

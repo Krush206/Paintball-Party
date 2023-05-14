@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "includes.h"
 
 int player_can_reach(int p, int x, int y)
@@ -1820,7 +1821,7 @@ void player_guard_territory_x(int i)
 					pp_game_data.player[i].fx = itofix(pp_game_data.player[i].x);
 	        		player_update_collision_map(&pp_game_data.player[i]);
 	        		player_update_collision_map(&pp_game_data.player[j]);
-					pp_game_data.player[i].vx += fdiv(pp_game_data.player[j].vx, itofix(2));
+					pp_game_data.player[i].vx += fixdiv(pp_game_data.player[j].vx, itofix(2));
 					if(pp_game_data.player[i].vx < -pp_game_data.player[i].mx)
 					{
 						pp_game_data.player[i].vx = -pp_game_data.player[i].mx;
@@ -1836,7 +1837,7 @@ void player_guard_territory_x(int i)
 					pp_game_data.player[i].fx = itofix(pp_game_data.player[i].x);
 		       		player_update_collision_map(&pp_game_data.player[i]);
 					pp_game_data.player[j].fx = itofix(pp_game_data.player[j].x);
-					pp_game_data.player[j].vx += fdiv(pp_game_data.player[i].vx, itofix(2));
+					pp_game_data.player[j].vx += fixdiv(pp_game_data.player[i].vx, itofix(2));
 					if(pp_game_data.player[j].vx < -pp_game_data.player[j].mx)
 					{
 						pp_game_data.player[j].vx = -pp_game_data.player[j].mx;

@@ -1,3 +1,4 @@
+#include <math.h>
 #include "includes.h"
 
 #define PAINTBALL_WHO_TIME 4
@@ -19,8 +20,8 @@ void create_paintball(int color, int x, int y, int angle, int type)
             	pp_game_data.paintball[i].fx = itofix(pp_game_data.paintball[i].x);
             	pp_game_data.paintball[i].fy = itofix(pp_game_data.paintball[i].y);
             	pp_game_data.paintball[i].angle = itofix(angle);
-            	pp_game_data.paintball[i].vx = fmul(fcos(pp_game_data.paintball[i].angle), itofix(8));
-            	pp_game_data.paintball[i].vy = fmul(fsin(pp_game_data.paintball[i].angle), itofix(8));
+            	pp_game_data.paintball[i].vx = fixmul(cos(pp_game_data.paintball[i].angle), itofix(8));
+            	pp_game_data.paintball[i].vy = fixmul(sin(pp_game_data.paintball[i].angle), itofix(8));
             	pp_game_data.paintball[i].who = color;
             	if(angle % 64 == 0)
             	{
@@ -74,8 +75,8 @@ void create_paintball(int color, int x, int y, int angle, int type)
             	pp_game_data.paintball[i].fx = itofix(pp_game_data.paintball[i].x);
             	pp_game_data.paintball[i].fy = itofix(pp_game_data.paintball[i].y);
             	pp_game_data.paintball[i].angle = itofix(angle);
-            	pp_game_data.paintball[i].vx = fmul(fcos(pp_game_data.paintball[i].angle), itofix(8));
-            	pp_game_data.paintball[i].vy = fmul(fsin(pp_game_data.paintball[i].angle), itofix(8));
+            	pp_game_data.paintball[i].vx = fixmul(cos(pp_game_data.paintball[i].angle), itofix(8));
+            	pp_game_data.paintball[i].vy = fixmul(sin(pp_game_data.paintball[i].angle), itofix(8));
             	pp_game_data.paintball[i].who = color;
             	if(angle % 64 == 0)
             	{
@@ -167,8 +168,8 @@ void paintball_do_hit(PAINTBALL * pp, int i)
 					{
 						pp->angle = itofix(128) - pp->angle;
 					}
-	            	pp->vx = fmul(fcos(pp->angle), itofix(8));
-    	        	pp->vy = fmul(fsin(pp->angle), itofix(8));
+	            	pp->vx = fixmul(cos(pp->angle), itofix(8));
+    	        	pp->vy = fixmul(sin(pp->angle), itofix(8));
 					pp->dwho = i;
 					ncds_play_sample(pp_game_data.player[i].sound[PP_SOUND_RICOCHET], 128, -1, -1);
 					break;
@@ -198,8 +199,8 @@ void paintball_do_hit(PAINTBALL * pp, int i)
 					{
 						pp->angle = itofix(128) - pp->angle;
 					}
-	            	pp->vx = fmul(fcos(pp->angle), itofix(8));
-    	        	pp->vy = fmul(fsin(pp->angle), itofix(8));
+	            	pp->vx = fixmul(cos(pp->angle), itofix(8));
+    	        	pp->vy = fixmul(sin(pp->angle), itofix(8));
 					pp->dwho = i;
 					ncds_play_sample(pp_game_data.player[i].sound[PP_SOUND_RICOCHET], 128, -1, -1);
 					break;
@@ -218,8 +219,8 @@ void paintball_do_hit(PAINTBALL * pp, int i)
 					{
 						pp->angle = itofix(128) - pp->angle;
 					}
-	            	pp->vx = fmul(fcos(pp->angle), itofix(8));
-   	        		pp->vy = fmul(fsin(pp->angle), itofix(8));
+	            	pp->vx = fixmul(cos(pp->angle), itofix(8));
+   	        		pp->vy = fixmul(sin(pp->angle), itofix(8));
 					pp->dtime = 2;
 					pp->dwho = i;
 					ncds_play_sample(pp_game_data.player[i].sound[PP_SOUND_RICOCHET], 128, -1, -1);
@@ -331,16 +332,16 @@ void paintball_move(PAINTBALL * pp)
 		case AMMO_TYPE_NORMAL:
 		case AMMO_TYPE_EXPLOSIVE:
 		{
-			pp->fx = fadd(pp->fx, pp->vx);
-			pp->fy = fadd(pp->fy, pp->vy);
+			pp->fx = fixadd(pp->fx, pp->vx);
+			pp->fy = fixadd(pp->fy, pp->vy);
 			pp->x = fixtoi(pp->fx);
 			pp->y = fixtoi(pp->fy);
 			break;
 		}
 		case AMMO_TYPE_BOUNCE:
 		{
-			pp->fy = fadd(pp->fy, pp->vy);
-			pp->vy = fadd(pp->vy, ftofix(0.5));
+			pp->fy = fixadd(pp->fy, pp->vy);
+			pp->vy = fixadd(pp->vy, ftofix(0.5));
 			pp->x = fixtoi(pp->fx);
 			pp->y = fixtoi(pp->fy);
 			update_collision_map(&pp->cmap, pp->x, pp->y);
@@ -360,7 +361,7 @@ void paintball_move(PAINTBALL * pp)
 					ncds_play_sample(pp_game_data.player[pp->who].sound[PP_SOUND_SPLAT], 128, 1000 + rand() % 100 - 50, -1);
 				}
 			}
-			pp->fx = fadd(pp->fx, pp->vx);
+			pp->fx = fixadd(pp->fx, pp->vx);
 			if(pp->vy > itofix(7))
 			{
 				pp->vy = itofix(7);
@@ -381,10 +382,10 @@ void paintball_move(PAINTBALL * pp)
 			{
 				pp->misc = 0;
 			}
-			pp->fy = fadd(pp->fy, pp->vy);
+			pp->fy = fixadd(pp->fy, pp->vy);
 			if(pp->misc != 1)
 			{
-				pp->vy = fadd(pp->vy, ftofix(0.5));
+				pp->vy = fixadd(pp->vy, ftofix(0.5));
 				if(pp->vy > itofix(0) && pp->angle >= itofix(192))
 				{
 					pp->angle -= itofix(128);
@@ -444,7 +445,7 @@ void paintball_move(PAINTBALL * pp)
 			{
 				pp->vy = itofix(7);
 			}
-			pp->fx = fadd(pp->fx, pp->vx);
+			pp->fx = fixadd(pp->fx, pp->vx);
 			pp->x = fixtoi(pp->fx);
 			pp->y = fixtoi(pp->fy);
 			if(pp->misc)
@@ -479,14 +480,14 @@ void paintball_move(PAINTBALL * pp)
 				{
 					if(pp_game_data.object[pp->target].active && !pp->who_time)
 					{
-						target_angle = fatan2(fsub(pp_game_data.object[pp->target].y + itofix(pp_game_data.object[pp->target].ap->h / 2), pp->fy + itofix(pp_game_data.player[pp->who].character.pap->h / 2)), fsub(pp_game_data.object[pp->target].x + itofix(pp_game_data.object[pp->target].ap->w / 2), pp->fx + itofix(pp_game_data.player[pp->who].character.pap->w / 2)));
+						target_angle = atan2(fixsub(pp_game_data.object[pp->target].y + itofix(pp_game_data.object[pp->target].ap->h / 2), pp->fy + itofix(pp_game_data.player[pp->who].character.pap->h / 2)), fixsub(pp_game_data.object[pp->target].x + itofix(pp_game_data.object[pp->target].ap->w / 2), pp->fx + itofix(pp_game_data.player[pp->who].character.pap->w / 2)));
 					}
 				}
 				else
 				{
 					if(pp_game_data.player[pp->target].active && !pp_game_data.player[pp->target].tele_in && !pp_game_data.player[pp->target].tele_out && !pp->who_time && !pp_game_data.player[pp->target].cloak_time)
 					{
-						target_angle = fatan2(fsub(pp_game_data.player[pp->target].fy + itofix(pp_game_data.player[pp->target].character.ap[pp_game_data.player[pp->target].state]->h / 2), pp->fy + itofix(pp_game_data.player[pp->who].character.pap->h / 2)), fsub(pp_game_data.player[pp->target].fx + itofix(pp_game_data.player[pp->target].character.ap[pp_game_data.player[pp->target].state]->w / 2), pp->fx + itofix(pp_game_data.player[pp->who].character.pap->w / 2)));
+						target_angle = atan2(fixsub(pp_game_data.player[pp->target].fy + itofix(pp_game_data.player[pp->target].character.ap[pp_game_data.player[pp->target].state]->h / 2), pp->fy + itofix(pp_game_data.player[pp->who].character.pap->h / 2)), fixsub(pp_game_data.player[pp->target].fx + itofix(pp_game_data.player[pp->target].character.ap[pp_game_data.player[pp->target].state]->w / 2), pp->fx + itofix(pp_game_data.player[pp->who].character.pap->w / 2)));
 					}
 				}
 				if(target_angle != -itofix(9876))
@@ -506,18 +507,18 @@ void paintball_move(PAINTBALL * pp)
 		           			pp->angle = (pp->angle + itofix(4)) & 0xFFFFFF;
            				}
        				}
-					pp->vx = fmul(itofix(4), fcos(pp->angle));
-					pp->vy = fmul(itofix(4), fsin(pp->angle));
+					pp->vx = fixmul(itofix(4), cos(pp->angle));
+					pp->vy = fixmul(itofix(4), sin(pp->angle));
        			}
-				pp->fx = fadd(pp->fx, pp->vx);
-				pp->fy = fadd(pp->fy, pp->vy);
+				pp->fx = fixadd(pp->fx, pp->vx);
+				pp->fy = fixadd(pp->fy, pp->vy);
 				pp->x = fixtoi(pp->fx);
 				pp->y = fixtoi(pp->fy);
 			}
 			else
 			{
-				pp->fx = fadd(pp->fx, pp->vx);
-				pp->fy = fadd(pp->fy, pp->vy);
+				pp->fx = fixadd(pp->fx, pp->vx);
+				pp->fy = fixadd(pp->fy, pp->vy);
 				pp->x = fixtoi(pp->fx);
 				pp->y = fixtoi(pp->fy);
 			}

@@ -33,6 +33,7 @@
 #include <png.h>
 #include <allegro.h>
 #include <allegro/internal/aintern.h>
+#include <zlib.h>
 #include "loadpng.h"
 
 /* We need internals _color_load_depth and _fixup_loaded_bitmap.  The
@@ -331,7 +332,7 @@ BITMAP *load_png(AL_CONST char *filename, RGB *pal)
      * the normal method of doing things with libpng).  REQUIRED unless you
      * set up your own error handlers in the png_create_read_struct() earlier.
      */
-    if (setjmp(png_ptr->jmpbuf)) {
+    if (png_jmpbuf(png_ptr)) {
 	/* Free all of the memory associated with the png_ptr and info_ptr */
 	png_destroy_read_struct(&png_ptr, &info_ptr, (png_infopp)NULL);
 	pack_fclose(fp);
@@ -430,7 +431,7 @@ BITMAP *load_memory_png(AL_CONST void *buffer, int bufsize, RGB *pal)
      * the normal method of doing things with libpng).  REQUIRED unless you
      * set up your own error handlers in the png_create_read_struct() earlier.
      */
-    if (setjmp(png_ptr->jmpbuf)) {
+    if (png_jmpbuf(png_ptr)) {
 	/* Free all of the memory associated with the png_ptr and info_ptr */
 	png_destroy_read_struct(&png_ptr, &info_ptr, (png_infopp)NULL);
 	/* If we get here, we had a problem reading the file */
@@ -577,7 +578,7 @@ int save_png(AL_CONST char *filename, BITMAP *bmp, AL_CONST RGB *pal)
     }
 
     /* Set error handling. */
-    if (setjmp(png_ptr->jmpbuf)) {
+    if (png_jmpbuf(png_ptr)) {
 	/* If we get here, we had a problem reading the file. */
 	pack_fclose(fp);
 	png_destroy_write_struct(&png_ptr, (png_infopp)NULL);

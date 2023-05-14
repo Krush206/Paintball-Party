@@ -1,3 +1,4 @@
+#include <string.h>
 #include "message.h"
 
 void ncdmsg_add(NCDMSG_QUEUE * qp, char * dp, int time)
