@@ -186,7 +186,7 @@ MAKE_PUTFUNC( _aa_put_alpha_dither_8   ,8,8,   ALPHA  ,DITHER    ,NONE   ,PUT)
 //no dither-notrans
 //no alpha-dither-notrans
 
-#ifdef GFX_MODEX
+#if defined(GFX_MODEX) && defined(WIN32)
 //macro       name                         bpp/2 ALPHA  DITHER     NOTRANS PUT
 MAKE_PUTFUNC( _aa_put_modex_8              ,8,8, NONE,  NO_DITHER, NONE,   PUT_8X)
 MAKE_PUTFUNC( _aa_put_modex_dither_8       ,8,8, NONE,  DITHER,    NONE,   PUT_8X)
@@ -367,7 +367,7 @@ PUT_TYPE *get_aa_put_function(BITMAP *destination, int options) {
 	if (options & AA_DITHER)  j += 2;
 	if (options & AA_NOTRANS) j += 4;
 
-#	ifdef GFX_MODEX
+#	if defined(GFX_MODEX) && defined(WIN32)
 		if (is_planar_bitmap(destination)) {
 			if (bpp != 8) return NULL;
 			return put_array_modex[j & 3];
