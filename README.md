@@ -25,12 +25,9 @@ Create your own add-on levels and characters with the built-in designing tools f
 ## Notes:
 For (old) binary releases of the game, [click here](https://ulozto.net/folder/SiFlXsG6bjwn).
 
-The network play mode has been removed from the game since 1.4 release and is planned to be reimplemented. On older releases (1.3 and 1.35) it's rather laggy.
-Although the network code has been enhanced on 1.4 beta release, this release has vanished and there's no single evidence of it in the net.
+The network play mode has been removed from the game since 1.4 release, and is planned to be reimplemented.
 
-## Plans:
-* Implement network play mode.
-* Server finder list.
+The character editor app doesn't build on Linux. Work is on the way to bring the character editor app to Linux.
 
 ## Screenshots:
 ![](https://djungxnpq2nug.cloudfront.net/image/project/screenshot/1157_large.gif)
