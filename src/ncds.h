@@ -9,8 +9,6 @@ extern "C" {
 
 /* undefine these to disable portions of NCDS */
 #define NCDS_DUMB
-#define NCDS_ALMP3
-#define NCDS_ALOGG
 
 /* sound system channel modes */
 #define NCDS_MAX_CHANNELS     32
