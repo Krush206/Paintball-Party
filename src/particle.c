@@ -57,7 +57,7 @@ void generate_paintball_splat_particles(PAINTBALL * pp)
 	{
 		angle = rand() % 256;
 		length = rand() % (pp_game_data.player[pp->who].character.pap->w / 2);
-		generate_particle(pp->x + pp_game_data.player[pp->who].character.pap->w / 2, pp->y + pp_game_data.player[pp->who].character.pap->h / 2, fixtof(fixmul(ftofix(length), cos(itofix(angle)))), fixtof(fixmul(ftofix(length), sin(itofix(angle))) - itofix(1)), pp->who);
+		generate_particle(pp->x + pp_game_data.player[pp->who].character.pap->w / 2, pp->y + pp_game_data.player[pp->who].character.pap->h / 2, fixtof(fixmul(ftofix(length), cosf(itofix(angle)))), fixtof(fixmul(ftofix(length), sinf(itofix(angle))) - itofix(1)), pp->who);
 	}
 }
 
