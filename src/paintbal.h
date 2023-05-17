@@ -18,7 +18,7 @@ typedef struct
     COLLISION_MAP cmap;
     fixed fx, fy, vx, vy;
     int x, y, who, dwho, type, misc, who_time, dtime, frame, iced;
-    int active, split;
+    int active, split, moving;
 
 	/* seeker data */
     int target;

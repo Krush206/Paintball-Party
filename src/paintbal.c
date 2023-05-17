@@ -127,7 +127,7 @@ void generate_paintball_splat(PAINTBALL * pp)
 		pp_split = create_paintball(pp->who, pp->x, pp->y, fixtoi(pp->angle) + 160, AMMO_TYPE_NORMAL);
 		pp_split->split = 1;
 	}
-	pp->active = 0;
+	pp->active = pp->moving = 0;
 }
 
 void reset_paintballs(void)
@@ -136,7 +136,7 @@ void reset_paintballs(void)
 
 	for(i = 0; i < MAX_PAINTBALLS; i++)
 	{
-		pp_game_data.paintball[i].active = pp_game_data.paintball[i].split = 0;
+		pp_game_data.paintball[i].active = pp_game_data.paintball[i].split = pp_game_data.paintball[i].moving = 0;
 	}
 }
 
@@ -332,7 +332,7 @@ void paintball_move(PAINTBALL * pp)
 	int ox, oy;
 	static int rev_vx, rev_vy, up;
 
-	if(pp_game_data.player[pp->who].gun_flash.active)
+	if(pp_game_data.player[pp->who].gun_flash.active && !pp->moving)
 		switch(pp_game_data.player[pp->who].state)
 		{
 			case PS_STAND_RIGHT:
@@ -345,7 +345,7 @@ void paintball_move(PAINTBALL * pp)
 			case PS_FJUMP_RIGHT:
 			case PS_FDUCK_RIGHT:
 			case PS_FSTAND_RIGHT:
-				rev_vx = -(rev_vy = pp->vx = itofix(10)), up = 0;
+				rev_vx = -(rev_vy = pp->vx = itofix(10)), up = 0, pp->moving = 1;
 				break;
 			case PS_STAND_LEFT:
 			case PS_WALK_LEFT:
@@ -357,13 +357,13 @@ void paintball_move(PAINTBALL * pp)
 			case PS_FJUMP_LEFT:
 			case PS_FDUCK_LEFT:
 			case PS_FSTAND_LEFT:
-				rev_vx = -(rev_vy = pp->vx = -itofix(10)), up = 0;
+				rev_vx = -(rev_vy = pp->vx = -itofix(10)), up = 0, pp->moving = 1;
 				break;
 			case PS_STAND_UP_RIGHT:
 			case PS_STAND_UP_LEFT:
 			case PS_FSTAND_UP_RIGHT:
 			case PS_FSTAND_UP_LEFT:
-				rev_vx = rev_vy = -(pp->vy = -itofix(10)), up = 1;
+				rev_vx = rev_vy = -(pp->vy = -itofix(10)), up = pp->moving = 1;
 		}
 
 	switch(pp->type)
@@ -376,7 +376,7 @@ void paintball_move(PAINTBALL * pp)
 				if(up) rev_vx = -(pp->vx = rev_vx), pp->vy = rev_vy;
 				else pp->vx = rev_vx, rev_vy = -(pp->vy = rev_vy);
 
-				pp->split = 0;
+				pp->split = 0, pp->moving = 1;
 			}
 
 			pp->fx = fixadd(pp->fx, pp->vx);
