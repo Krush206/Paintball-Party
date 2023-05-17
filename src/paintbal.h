@@ -18,7 +18,7 @@ typedef struct
     COLLISION_MAP cmap;
     fixed fx, fy, vx, vy;
     int x, y, who, dwho, type, misc, who_time, dtime, frame, iced;
-    int active;
+    int active, split;
 
 	/* seeker data */
     int target;
@@ -26,7 +26,7 @@ typedef struct
 
 } PAINTBALL;
 
-void create_paintball(int color, int x, int y, int angle, int type);
+PAINTBALL *create_paintball(int color, int x, int y, int angle, int type);
 void generate_paintball(PLAYER * pp);
 void reset_paintballs(void);
 void paintball_logic(PAINTBALL * pp);

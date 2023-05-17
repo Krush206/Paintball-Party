@@ -3,7 +3,7 @@
 
 #define PAINTBALL_WHO_TIME 4
 
-void create_paintball(int color, int x, int y, int angle, int type)
+PAINTBALL *create_paintball(int color, int x, int y, int angle, int type)
 {
 	int i;
 
@@ -96,7 +96,7 @@ void create_paintball(int color, int x, int y, int angle, int type)
             	update_collision_map(&pp_game_data.paintball[i].cmap, pp_game_data.paintball[i].x, pp_game_data.paintball[i].y);
             	pp_game_data.paintball[i].active = 1;
             }
-            break;
+            return &pp_game_data.paintball[i];
 		}
 	}
 }
@@ -117,11 +117,15 @@ void generate_paintball(PLAYER * pp)
 
 void generate_paintball_splat(PAINTBALL * pp)
 {
+	PAINTBALL *pp_split;
+
 	generate_paintball_splat_particles(pp);
 	if(pp->type == AMMO_TYPE_EXPLOSIVE)
 	{
-		create_paintball(pp->who, pp->x, pp->y, fixtoi(pp->angle) + 96, AMMO_TYPE_NORMAL);
-		create_paintball(pp->who, pp->x, pp->y, fixtoi(pp->angle) + 160, AMMO_TYPE_NORMAL);
+		pp_split = create_paintball(pp->who, pp->x, pp->y, fixtoi(pp->angle) + 96, AMMO_TYPE_NORMAL);
+		pp_split->split = 1;
+		pp_split = create_paintball(pp->who, pp->x, pp->y, fixtoi(pp->angle) + 160, AMMO_TYPE_NORMAL);
+		pp_split->split = 1;
 	}
 	pp->active = 0;
 }
@@ -132,7 +136,7 @@ void reset_paintballs(void)
 
 	for(i = 0; i < MAX_PAINTBALLS; i++)
 	{
-		pp_game_data.paintball[i].active = 0;
+		pp_game_data.paintball[i].active = pp_game_data.paintball[i].split = 0;
 	}
 }
 
@@ -326,12 +330,55 @@ void paintball_move(PAINTBALL * pp)
 	fixed target_angle = -itofix(9876);
 	fixed temp;
 	int ox, oy;
+	static int rev_vx, rev_vy, up;
+
+	if(pp_game_data.player[pp->who].gun_flash.active)
+		switch(pp_game_data.player[pp->who].state)
+		{
+			case PS_STAND_RIGHT:
+			case PS_WALK_RIGHT:
+			case PS_JUMP_RIGHT:
+			case PS_DUCK_RIGHT:
+			case PS_FALL_RIGHT:
+			case PS_FFALL_RIGHT:
+			case PS_FWALK_RIGHT:
+			case PS_FJUMP_RIGHT:
+			case PS_FDUCK_RIGHT:
+			case PS_FSTAND_RIGHT:
+				rev_vx = -(rev_vy = pp->vx = itofix(10)), up = 0;
+				break;
+			case PS_STAND_LEFT:
+			case PS_WALK_LEFT:
+			case PS_JUMP_LEFT:
+			case PS_DUCK_LEFT:
+			case PS_FALL_LEFT:
+			case PS_FFALL_LEFT:
+			case PS_FWALK_LEFT:
+			case PS_FJUMP_LEFT:
+			case PS_FDUCK_LEFT:
+			case PS_FSTAND_LEFT:
+				rev_vx = -(rev_vy = pp->vx = -itofix(10)), up = 0;
+				break;
+			case PS_STAND_UP_RIGHT:
+			case PS_STAND_UP_LEFT:
+			case PS_FSTAND_UP_RIGHT:
+			case PS_FSTAND_UP_LEFT:
+				rev_vx = rev_vy = -(pp->vy = -itofix(10)), up = 1;
+		}
 
 	switch(pp->type)
 	{
 		case AMMO_TYPE_NORMAL:
 		case AMMO_TYPE_EXPLOSIVE:
 		{
+			if(pp->split)
+			{
+				if(up) rev_vx = -(pp->vx = rev_vx), pp->vy = rev_vy;
+				else pp->vx = rev_vx, rev_vy = -(pp->vy = rev_vy);
+
+				pp->split = 0;
+			}
+
 			pp->fx = fixadd(pp->fx, pp->vx);
 			pp->fy = fixadd(pp->fy, pp->vy);
 			pp->x = fixtoi(pp->fx);
