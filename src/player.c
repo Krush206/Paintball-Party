@@ -2244,7 +2244,7 @@ void player_logic(int i, TILEMAP * mp)
         	{
 	            pp_game_data.player[i].gun_flash.x = pp_game_data.player[i].x + pp_game_data.player[i].character.gx_table[pp_game_data.player[i].state];
             	pp_game_data.player[i].gun_flash.y = pp_game_data.player[i].y + pp_game_data.player[i].character.gy_table[pp_game_data.player[i].state];
-				create_paintball(pp_game_data.player[i].color, pp_game_data.player[i].x + pp_game_data.player[i].character.px_table[pp_game_data.player[i].state], pp_game_data.player[i].y + pp_game_data.player[i].character.py_table[pp_game_data.player[i].state], a_table[pp_game_data.player[i].state], pp_game_data.player[i].weapon);
+				(void) create_paintball(pp_game_data.player[i].color, pp_game_data.player[i].x + pp_game_data.player[i].character.px_table[pp_game_data.player[i].state], pp_game_data.player[i].y + pp_game_data.player[i].character.py_table[pp_game_data.player[i].state], a_table[pp_game_data.player[i].state], pp_game_data.player[i].weapon);
 				if(pp_game_data.player[i].ammo[pp_game_data.player[i].weapon] == 0)
 				{
 				    pp_cycle_ammo(&pp_game_data.player[i]);
